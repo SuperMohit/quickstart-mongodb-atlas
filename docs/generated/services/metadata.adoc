@@ -1,1 +1,13 @@
-// placeholder
+
+:template_atlas:
+:template_aws_cloudformation_stack:
+:template_aws_iam_role:
+:template_aws_secretsmanager_secret:
+:template_cloudformation:
+:template_iam:
+:template_mongodb_atlas_cluster:
+:template_mongodb_atlas_databaseuser:
+:template_mongodb_atlas_networkpeering:
+:template_mongodb_atlas_project:
+:template_mongodb_atlas_projectipaccesslist:
+:template_secretsmanager:
