@@ -1,27 +1,27 @@
 
-.MongoDB Atlas ApiKey Configuration
+.MongoDB Atlas API key configuration.
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
-|Parameter label (name) |Default value|Description|MongoDB Atlas API PublicKey
-(`PublicKey`)|`PublicKey`|Your MongoDB Cloud Public API Key|MongoDB Atlas API PrivateKey
-(`PrivateKey`)|`PrivateKey`|Your MongoDB Cloud Private API Key|MongoDB Atlas API OrgId
-(`OrgId`)|`OrgId`|Your MongoDB Cloud Organization Id
+|Parameter label (name) |Default value|Description|MongoDB Atlas API public key.
+(`PublicKey`)|`PublicKey`|MongoDB cloud public API key.|MongoDB Atlas API private key.
+(`PrivateKey`)|`PrivateKey`|MongoDB cloud private API key.|MongoDB Atlas API organization ID.
+(`OrgId`)|`OrgId`|MongoDB cloud organization ID.
 |===
-.MongoDB Atlas Configuration
+.MongoDB Atlas configuration.
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
-|Parameter label (name) |Default value|Description|Register MongoDB Atlas CloudFormation resources
-(`RegisterMongoDBResources`)|`Yes`|Chose Yes to register MongoDB Atlas CloudFormation resource types. If you have already registered the resources in this AWS Region, you may choose No.|Name of new Atlas Project
-(`ProjectName`)|`aws-quickstart`|The name of the project.|Name of new cluster
-(`ClusterName`)|`Cluster-1`|Name of the cluster as it appears in Atlas. Once the cluster is created, its name cannot be changed.|The AWS Region for Atlas Cluster
-(`ClusterRegion`)|`us-east-1`|The AWS Region where the Atlas DB Cluster will run.|MongoDB Atlas Instance Size
-(`ClusterInstanceSize`)|`M10`|Atlas provides different cluster tiers, each with a default storage capacity and RAM size. The cluster you select is used for all the data-bearing hosts in your cluster tier. See https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws.
+|Parameter label (name) |Default value|Description|Register MongoDB Atlas CloudFormation resources.
+(`RegisterMongoDBResources`)|`Yes`|Choose "Yes" to register MongoDB Atlas CloudFormation resource types. If you already registered resources in your AWS Region, enter "No."|Name of new Atlas project.
+(`ProjectName`)|`aws-quickstart`|Name of the project.|Name of new cluster.
+(`ClusterName`)|`Cluster-1`|Name of the cluster as it appears in Atlas. This name cannot be changed after the cluster is created.|AWS Region for Atlas cluster.
+(`ClusterRegion`)|`us-east-1`|AWS Region where the Atlas database cluster runs.|MongoDB Atlas instance size.
+(`ClusterInstanceSize`)|`M10`|Atlas provides different cluster tiers, each with a default storage capacity and RAM size. The cluster you choose is used for all data-bearing hosts in your cluster tier (see https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws).
 |===
-.AWS Quick Start Configuration
+.AWS Quick Start configuration.
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
-|Parameter label (name) |Default value|Description|Quick Start S3 Bucket Name
-(`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 Key Prefix
-(`QSS3KeyPrefix`)|`quickstart-mongodb-atlas/`|S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).|Quick Start S3 Bucket Region
-(`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
+|Parameter label (name) |Default value|Description|Quick Start S3 bucket name.
+(`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 key prefix.
+(`QSS3KeyPrefix`)|`quickstart-mongodb-atlas/`|S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/).|Quick Start S3 bucket Region.
+(`QSS3BucketRegion`)|`us-east-1`|AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. If you use your own bucket, you must specify this value.
 |===

@@ -1,9 +1,9 @@
 
-=== Parameters for deploying MongoDB Atlas without VPC peering
+=== Parameters for deploying MongoDB Atlas without VPC peering.
 include::mongodb-atlas-main.template.adoc[]
 
-=== Parameters for deploying MongoDB Atlas with VPC peering to a new VPC
+=== Parameters for deploying MongoDB Atlas with VPC peering into a new VPC.
 include::mongodb-atlas-peering-newvpc.template.adoc[]
 
-=== Parameters for deploying MongoDB Atlas with VPC peering to an existing VPC
+=== Parameters for deploying MongoDB Atlas with VPC peering into an existing VPC.
 include::mongodb-atlas-peering-existingvpc.template.adoc[]

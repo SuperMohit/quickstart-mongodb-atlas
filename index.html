@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.12">
-<title>Example Product Name on the AWS Cloud</title>
+<title>MongoDB Atlas on the AWS Cloud</title>
 <style>
 
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -790,7 +790,7 @@ p.footer-text a{color:#d7d8d8}
 <div id="toctitle"></div>
 <ul class="sectlevel1">
 <li><a href="#_overview">Overview</a></li>
-<li><a href="#_example_product_name_on_aws">Example Product Name on AWS</a></li>
+<li><a href="#_mongodb_atlas_on_aws">MongoDB Atlas on AWS</a></li>
 <li><a href="#_aws_costs">AWS costs</a></li>
 <li><a href="#_software_licenses">Software licenses</a></li>
 <li><a href="#_architecture">Architecture</a></li>
@@ -808,17 +808,19 @@ p.footer-text a{color:#d7d8d8}
 </ul>
 </li>
 <li><a href="#_test_the_deployment">Test the deployment</a></li>
-<li><a href="#_post_deployment_steps">Post-deployment steps</a></li>
-<li><a href="#_best_practices_for_using_example_product_name_on_aws">Best practices for using Example Product Name on AWS</a></li>
-<li><a href="#_security">Security</a></li>
-<li><a href="#_other_useful_information">Other useful information</a></li>
+<li><a href="#_best_practices_for_using_mongodb_atlas_on_aws">Best practices for using MongoDB Atlas on AWS</a></li>
+<li><a href="#_security">Security</a>
+<ul class="sectlevel2">
+<li><a href="#_mongodb_atlas_cloudformation_resource_reference">MongoDB Atlas CloudFormation resource reference</a></li>
+</ul>
+</li>
 <li><a href="#_faq">FAQ</a></li>
 <li><a href="#_troubleshooting">Troubleshooting</a></li>
 <li><a href="#_parameter_reference">Parameter reference</a>
 <ul class="sectlevel2">
-<li><a href="#_parameters_for_deploying_mongodb_atlas_without_vpc_peering">Parameters for deploying MongoDB Atlas without VPC peering</a></li>
-<li><a href="#_parameters_for_deploying_mongodb_atlas_with_vpc_peering_to_a_new_vpc">Parameters for deploying MongoDB Atlas with VPC peering to a new VPC</a></li>
-<li><a href="#_parameters_for_deploying_mongodb_atlas_with_vpc_peering_to_an_existing_vpc">Parameters for deploying MongoDB Atlas with VPC peering to an existing VPC</a></li>
+<li><a href="#_parameters_for_deploying_mongodb_atlas_without_vpc_peering">Parameters for deploying MongoDB Atlas without VPC peering.</a></li>
+<li><a href="#_parameters_for_deploying_mongodb_atlas_with_vpc_peering_into_a_new_vpc">Parameters for deploying MongoDB Atlas with VPC peering into a new VPC.</a></li>
+<li><a href="#_parameters_for_deploying_mongodb_atlas_with_vpc_peering_into_an_existing_vpc">Parameters for deploying MongoDB Atlas with VPC peering into an existing VPC.</a></li>
 </ul>
 </li>
 <li><a href="#_send_us_feedback">Send us feedback</a></li>
@@ -831,17 +833,17 @@ p.footer-text a{color:#d7d8d8}
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<h2 id="_example_product_name_on_the_aws_cloud" class="discrete text-center">Example Product Name on the AWS Cloud</h2>
+<h2 id="_mongodb_atlas_on_the_aws_cloud" class="discrete text-center">MongoDB Atlas on the AWS Cloud</h2>
 <h2 id="_quick_start_reference_deployment" class="discrete text-left text-center">Quick Start Reference Deployment</h2>
 <div class="imageblock text-center">
 <div class="content">
-<img src="https://aws-quickstart.s3.amazonaws.com/quickstart-documentation-base/docs/boilerplate/.images/aws-quickstart-graphic.png" alt="QS" width="80" height="80">
+<img src="https://aws-quickstart.s3.amazonaws.com/quickstart-mongodb-atlas/docs/boilerplate/.images/aws-quickstart-graphic.png" alt="QS" width="80" height="80">
 </div>
 </div>
 <div class="paragraph text-center">
-<p><strong>Month of launch or significant update (spelled out) Year</strong><br>
-<em>Shuai Ye, Michael McConnell, and John Smith, Example Company Name, Ltd.</em><br>
-<em>Toni Jones, AWS Quick Start team</em></p>
+<p><strong>March 2021</strong><br>
+<em>Jason Mimick, MongoDB Inc.</em><br>
+<em>Vinod Shukla, AWS Quick Start team</em></p>
 </div>
 <div class="admonitionblock tip text-left">
 <table>
@@ -850,14 +852,14 @@ p.footer-text a{color:#d7d8d8}
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Visit our <a href="https://github.com/aws-quickstart/quickstart-documentation-base" target="_blank" rel="noopener">GitHub repository</a> for source files and to post feedback,
+Visit our <a href="https://github.com/aws-quickstart/quickstart-mongodb-atlas" target="_blank" rel="noopener">GitHub repository</a> for source files and to post feedback,
 report bugs, or submit feature ideas for this Quick Start.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph text-left">
-<p>This Quick Start was created by Example Company Name, Ltd. in collaboration with Amazon Web Services (AWS). <a href="http://aws.amazon.com/quickstart/" target="_blank" rel="noopener">Quick Starts</a> are automated reference deployments that use AWS CloudFormation templates to deploy key technologies on AWS, following AWS best practices.</p>
+<p>This Quick Start was created by MongoDB Inc. in collaboration with Amazon Web Services (AWS). <a href="http://aws.amazon.com/quickstart/" target="_blank" rel="noopener">Quick Starts</a> are automated reference deployments that use AWS CloudFormation templates to deploy key technologies on AWS, following AWS best practices.</p>
 </div>
 </div>
 </div>
@@ -865,10 +867,35 @@ report bugs, or submit feature ideas for this Quick Start.
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This guide provides instructions for deploying the Example Product Name Quick Start reference architecture on the AWS Cloud.</p>
+<p>Use this Quick Start to launch a fully managed MongoDB Atlas deployment on the AWS Cloud.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start is for users who &lt;target audience and usage scenario&gt;</p>
+<p>MongoDB Atlas is a global cloud document database service for modern applications. Deploying a fully managed MongoDB helps to ensure availability, scalability, and security compliance. You can extend your data with the MongoDB cloud platform, including full-text search, mobile sync, and automated data tiering.</p>
+</div>
+<div class="paragraph">
+<p>This Quick Start is for developers and DevOps professionals who want to create flexible, fully managed clusters on MongoDB Atlas. The template creates an Atlas project with a standard, single-region M10 cluster and can be customized for different cluster configurations and project settings.</p>
+</div>
+<div class="paragraph">
+<p>By default, every MongoDB Atlas cluster includes the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Support for the latest MongoDB enterprise database versions</p>
+</li>
+<li>
+<p>A minimum three-node replica set for high availability, deployed in a new virtual private cloud (VPC)</p>
+</li>
+<li>
+<p>Built-in security defaults, including always-on authentication and end-to-end encryption</p>
+</li>
+<li>
+<p>Fully managed database lifecycle with automated patches, backups, and monitoring</p>
+</li>
+<li>
+<p>Performance optimization features such as automatic scaling, index suggestions, and intelligent data tiering</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -885,10 +912,29 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 </div>
 </div>
 <div class="sect1">
-<h2 id="_example_product_name_on_aws">Example Product Name on AWS</h2>
+<h2 id="_mongodb_atlas_on_aws">MongoDB Atlas on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>&lt;Describe how the software works on AWS.&gt;</p>
+<p>Use this Quick Start to automatically set up the following MongoDB Atlas environment on AWS:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A MongoDB Atlas cluster consisting of a minimum three-node replica set, distributed across Availability Zones in the AWS Region of your choice, in a new virtual private cloud (VPC).</p>
+</li>
+<li>
+<p>A MongoDB Atlas project with an optional VPC network peering connection to a new or existing VPC on AWS to allow outbound internet connectivity to your Atlas cluster.</p>
+</li>
+<li>
+<p>An AWS Identity and Access Management (IAM) instance role with resource-level permissions for access to AWS services and MongoDB Atlas.</p>
+</li>
+<li>
+<p>A MongoDB database IAM role with read and write access to the MongoDB Atlas cluster in addition to a MongoDB Atlas IP access list entry for the database user to restrict access to authenticated users.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This Quick Start provisions complete MongoDB Atlas through CloudFormation using official MongoDB Atlas AWS CloudFormation resource types.</p>
 </div>
 </div>
 </div>
@@ -923,19 +969,7 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_software_licenses">Software licenses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>&lt;Example 1&gt;No licenses are required to deploy this Quick Start. All AWS service resources consumed during the launch of the Quick Start incur AWS service usage costs.</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;Example 2&gt;Some configurations of the Example Product Name Quick Start involve the use of third-party software. You are responsible for obtaining a license directly from the software vendor.</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;Example 3&gt;This Quick Start requires a license for Example Product Name. To use the Quick Start in your production environment, sign up for a license at &lt;link&gt;. When you launch the Quick Start, place the license key in an S3 bucket and specify its location.</em></p>
-</div>
-<div class="paragraph">
-<p><em>If you don’t have a license, the Quick Start deploys with a trial license. The trial license gives you &lt;n&gt; days of free usage in a non-production environment. After this time, you can upgrade to a production license by following the instructions at &lt;link&gt;.</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;AMI information&gt;The Quick Start requires a subscription to the Amazon Machine Image (AMI) for Example Product Name, which is available from <a href="https://aws.amazon.com/marketplace/" target="_blank" rel="noopener">AWS Marketplace</a>. Additional pricing, terms, and conditions may apply. For instructions, see <a href="#step-2.-subscribe-to-the-software-ami">step 2</a> in the deployment section.</em></p>
+<p>This Quick Start deploys MongoDB Atlas with the latest stable MongoDB enterprise version, which is licensed and distributed under the <a href="https://www.mongodb.com/licensing/server-side-public-license" target="_blank" rel="noopener">Server Side Public License (SSPL)</a>.</p>
 </div>
 </div>
 </div>
@@ -943,63 +977,45 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_architecture">Architecture</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Deploying this Quick Start for a new virtual private cloud (VPC) with
-default parameters builds the following Example Product Name environment in the
+<p>Deploying this Quick Start with peering for a new virtual private cloud (VPC) with
+default parameters builds the following <em>MongoDB Atlas</em> environment in the
 AWS Cloud.</p>
 </div>
 <div id="architecture1" class="imageblock">
 <div class="content">
-<img src="images/architecture_diagram.png" alt="Architecture" width="100%" height="100%">
+<a class="image" href="images/simple-quickstart-arch.png"><img src="images/simple-quickstart-arch.png" alt="Architecture" width="648" height="439"></a>
 </div>
-<div class="title">Figure 1. Quick Start architecture for Example Product Name on AWS</div>
+<div class="title">Figure 1. Quick Start architecture for <em>MongoDB Atlas</em></div>
 </div>
 <div class="paragraph">
-<p>As shown in <a href="#architecture1">Figure 1</a>, the Quick Start sets up the following:</p>
+<p>As shown in Figure 1, the Quick Start sets up the following:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A highly available architecture that spans two Availability Zones.*</p>
+<p>A virtual private cloud (VPC) that spans two Availability Zones. The VPC is configured with public subnets, according to AWS best practices, to provide you with your own virtual network on AWS.*</p>
 </li>
 <li>
-<p>A VPC configured with public and private subnets, according to AWS
-best practices, to provide you with your own virtual network on AWS.*</p>
+<p>In the public subnets, managed network address translation (NAT) gateways to allow outbound internet access.*</p>
 </li>
 <li>
-<p>In the public subnets:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Managed network address translation (NAT) gateways to allow outbound
-internet access for resources in the private subnets.*</p>
+<p>A VPC peering connection between your VPC and the MongoDB Atlas VPC.</p>
 </li>
 <li>
-<p>A Linux bastion host in an Auto Scaling group to allow inbound Secure
-Shell (SSH) access to EC2 instances in public and private subnets.*</p>
-</li>
-</ul>
-</div>
+<p>A VPC for the MongoDB Atlas cluster that spans at least three Availability Zones.</p>
 </li>
 <li>
-<p>In the private subnets:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>&lt;item&gt;.</p>
-</li>
-<li>
-<p>&lt;item&gt;.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>&lt;describe any additional components&gt;.</p>
+<p>A MongoDB Atlas cluster that contains the MongoDB Atlas project. The cluster uses MongoDB CloudFormation resource for the database user, cluster, and project-IP access list.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="small">*The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.</span></p>
+<p>*The template that deploys the Quick Start into an existing VPC skips
+the components marked by asterisks and prompts you for your existing VPC
+configuration.</p>
+</div>
+<div class="paragraph">
+<p>Deploying Atlas without peering is the simplest deployment option. It skips the VPC resources and creates only MongoDB Atlas resources using MongoDB CloudFormation resource types.</p>
 </div>
 </div>
 </div>
@@ -1015,7 +1031,10 @@ and <a href="https://aws.amazon.com/training/" target="_blank" rel="noopener">AW
 deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start also assumes familiarity with &lt;knowledge expectations specific to this Quick Start&gt;.</p>
+<p>This Quick Start assumes familiarity with MongoDB Atlas. For more information, see <a href="https://docs.atlas.mongodb.com/getting-started" target="_blank" rel="noopener">Get Started with Atlas</a>.</p>
+</div>
+<div class="paragraph">
+<p>This Quick Start uses the official MongoDB Atlas AWS CloudFormation resource types.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1050,36 +1069,36 @@ deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB::Atlas::Project</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB::Atlas::Cluster</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB::Atlas::DatabaseUser</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB::Atlas::ProjectIPAccessList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB::Atlas::NetworkPeering</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">VPCs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;n&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Elastic IP addresses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;n&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IAM roles</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Security groups</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;n&gt;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Identity and Access Management (IAM) roles</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;n&gt;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Auto Scaling groups</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;n&gt;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Application Load Balancers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;n&gt;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Network Load Balancers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;n&gt;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;type&gt; instances</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;n&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Secrets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 </tr>
 </tbody>
 </table>
@@ -1087,17 +1106,7 @@ deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
 <div class="sect3">
 <h4 id="_supported_regions">Supported Regions</h4>
 <div class="paragraph">
-<p>This Quick Start supports the following Regions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>us-east-1, US East (N. Virginia) (EXAMPLE)</p>
-</li>
-<li>
-<p>us-east-2, US East (Ohio) (EXAMPLE)</p>
-</li>
-</ul>
+<p>MongoDB Atlas is available across most AWS Regions. For more information, see <a href="https://docs.atlas.mongodb.com/reference/amazon-aws" target="_blank" rel="noopener">Amazon Web Services (AWS)</a>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1121,38 +1130,38 @@ Certain Regions are available on an opt-in basis. For more information, see <a h
 <div class="sect3">
 <h4 id="_prepare_your_aws_account">Prepare your AWS account</h4>
 <div class="paragraph">
-<p><em>Describe any setup required in the AWS account prior to template launch</em></p>
+<p>This Quick Start uses MongoDB Atlas CloudFormation resource types and automatically registers them in the AWS Region of your choice. Once it&#8217;s running, you can safely skip this step for additional deployments in each Region by setting the <code>RegisterMongoDBResources</code> parameter to <strong>No</strong>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_prepare_your_example_company_name_ltd_account">Prepare your Example Company Name, Ltd. account</h4>
+<h4 id="_prepare_your_mongodb_inc_account">Prepare your MongoDB Inc. account</h4>
 <div class="paragraph">
-<p><em>Describe any setup required in the partner portal/account prior to template launch</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_prepare_for_the_deployment">Prepare for the deployment</h4>
-<div class="paragraph">
-<p><em>Describe any preparation required to complete the product build, such as obtaining licenses or placing files in S3</em></p>
+<p>A MongoDB Atlas programmatic API key must be generated with the appropriate permissions and network access entries so that AWS CloudFormation can successfully authenticate the MongoDB cloud. For more information about creating and managing API keys, see <a href="https://docs.atlas.mongodb.com/tutorial/manage-programmatic-access" target="_blank" rel="noopener">Programmatic Access to Atlas</a>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_deployment_options">Deployment options</h4>
 <div class="paragraph">
-<p>This Quick Start provides two deployment options:</p>
+<p>This Quick Start provides three deployment options:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Deploy Example Product Name into a new VPC</strong>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys Example Product Name into this new VPC.</p>
+<p><strong>Deploy MongoDB Atlas with VPC peering into a new VPC (end-to-end deployment)</strong>. This option builds a complete MongoDB Atlas environment within AWS consisting of the a project, cluster, and more.</p>
 </li>
 <li>
-<p><strong>Deploy Example Product Name into an existing VPC</strong>. This option provisions Example Product Name in your existing AWS infrastructure.</p>
+<p><strong>Deploy MongoDB Atlas with VPC peering into an existing VPC</strong>. This option peers MongoDB Atlas with a new VPC.</p>
+</li>
+<li>
+<p><strong>Deploy MongoDB Atlas without VPC peering</strong>. This option peers MongoDB Atlas with your existing VPC.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and Example Product Name settings, as discussed later in this guide.</p>
+<p>For greater security, each option provisions an AWS IAM role and corresponding MongoDB database user.</p>
+</div>
+<div class="paragraph">
+<p>This Quick Start provides separate templates for these options. It also lets you configure database cluster tier settings and other MongoDB Atlas settings, as discussed later in this guide.</p>
 </div>
 </div>
 </div>
@@ -1176,48 +1185,52 @@ Certain Regions are available on an opt-in basis. For more information, see <a h
 </div>
 <div class="sect2">
 <h3 id="_launch_the_quick_start">Launch the Quick Start</h3>
-<div class="admonitionblock warning">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you’re deploying Example Product Name into an existing VPC, make sure that your VPC has two private subnets in different Availability Zones for the workload instances and that the subnets aren’t shared. This Quick Start doesn’t support <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html" target="_blank" rel="noopener">shared subnets</a>. These subnets require <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html" target="_blank" rel="noopener">NAT gateways</a> in their route tables to allow the instances to download packages and software without exposing them to the internet. Also make sure that the domain name option in the DHCP options is configured as explained in <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html" target="_blank" rel="noopener">DHCP options sets</a>. You provide your VPC settings when you launch the Quick Start.
+You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using this Quick Start. For full details, see the pricing pages for each AWS service used by this Quick Start. Prices are subject to change.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Each deployment takes about 15 minutes / 60 minutes / 1.5 hours to complete.</p>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see <a href="#_deployment_options">Deployment options</a> earlier in this guide.</p>
+<p>Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see <a href="#_deployment_options">deployment options</a> earlier in this guide.</p>
 </li>
 </ol>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 75%;">
-<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_launch_permalink" target="_blank" rel="noopener">Deploy Example Product Name into a new VPC on AWS</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_template_permalink" target="_blank" rel="noopener">View template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_launch_link" target="_blank" rel="noopener">Deploy MongoDB Atlas on AWS without VPC peering</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/aws-quickstart/quickstart-mongodb-atlas/blob/main/templates/mongodb-atlas-main.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_launch_permalink" target="_blank" rel="noopener">Deploy Example Product Name into an existing VPC on AWS</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_template_permalink" target="_blank" rel="noopener">View template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_launch_link" target="_blank" rel="noopener">Deploy MongoDB Atlas and peer with an existing VPC on AWS</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/aws-quickstart/quickstart-mongodb-atlas/blob/main/templates/mongodb-atlas-peering-existingvpc.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_launch_link" target="_blank" rel="noopener">Deploy MongoDB Atlas and peer with a new VPC on AWS</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/aws-quickstart/quickstart-mongodb-atlas/blob/main/templates/mongodb-atlas-peering-newvpc.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Each deployment takes about 10 minutes to complete.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>Check the AWS Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the network infrastructure for Example Product Name is built. The template is launched in the us-east-1 Region by default. For other choices, see <a href="#_supported_regions">Supported Regions</a> earlier in this guide.</p>
+<p>Check the AWS Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This is where the CloudFormation resource types for MongoDB Atlas are built and deployed. The template is launched in the us-east-1 Region by default. Note that resource types must be currently registered within each Region you use.</p>
 </li>
 </ol>
 </div>
@@ -1227,7 +1240,7 @@ If you’re deploying Example Product Name into an existing VPC, make sure that 
 <p>On the <strong>Create stack</strong> page, keep the default setting for the template URL, and then choose <strong>Next</strong>.</p>
 </li>
 <li>
-<p>On the <strong>Specify stack details</strong> page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary. For details on each parameter, see the <a href="#_parameter_reference">Parameter reference</a> section of this guide. When you finish reviewing and customizing the parameters, choose <strong>Next</strong>.</p>
+<p>On the <strong>Specify stack details</strong> page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings, and customize them as necessary.</p>
 </li>
 </ol>
 </div>
@@ -1243,10 +1256,10 @@ If you’re deploying Example Product Name into an existing VPC, make sure that 
 <p>Choose <strong>Create stack</strong> to deploy the stack.</p>
 </li>
 <li>
-<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the Example Product Name deployment is ready.</p>
+<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the MongoDB Atlas deployment is ready.</p>
 </li>
 <li>
-<p>Use the values displayed in the <strong>Outputs</strong> tab for the stack, as shown in <a href="#cfn_outputs">Figure 2</a>, to view the created resources.</p>
+<p>Use the values displayed in the <strong>Outputs</strong> tab for the stack, as shown in <a href="#cfn_outputs">MongoDB Atlas outputs after successful deployment</a>, to view the created resources.</p>
 </li>
 </ol>
 </div>
@@ -1254,7 +1267,7 @@ If you’re deploying Example Product Name into an existing VPC, make sure that 
 <div class="content">
 <a class="image" href="images/cfn_outputs.png"><img src="images/cfn_outputs.png" alt="cfn_outputs" width="100%" height="100%"></a>
 </div>
-<div class="title">Figure 2. Example Product Name outputs after successful deployment</div>
+<div class="title">Figure 2. MongoDB Atlas outputs after successful deployment</div>
 </div>
 </div>
 </div>
@@ -1262,20 +1275,29 @@ If you’re deploying Example Product Name into an existing VPC, make sure that 
 <div class="sect1">
 <h2 id="_test_the_deployment">Test the deployment</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>There are two ways to test your deployment:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>When the deployment completes, locate the new deployment project ID in the stack outputs, which you can use to open the MongoDB Atlas web console at <code>http://cloud.mongodb.com/v2/&lt;ProjectId&gt;</code>.</p>
+</li>
+<li>
+<p>Use the <code>mongo</code> shell. For more information, see <a href="https://docs.mongodb.com/manual/reference/program/mongo/index.html#connect-to-a-mongodb-atlas-cluster-using-aws-iam-credentials" target="_blank" rel="noopener">Connect to a MongoDB Atlas Cluster using AWS IAM Credentials</a>.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_post_deployment_steps">Post-deployment steps</h2>
-<div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_best_practices_for_using_example_product_name_on_aws">Best practices for using Example Product Name on AWS</h2>
+<h2 id="_best_practices_for_using_mongodb_atlas_on_aws">Best practices for using MongoDB Atlas on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>Add any best practices for using the software.</em></p>
+<p>There are many considerations for production-grade deployments. While this Quick Start demonstrates some of these, such as database-user security and peering, see <a href="https://docs.atlas.mongodb.com/best-practices/" target="_blank" rel="noopener">Atlas Production Best Practices</a> for the latest information.</p>
+</div>
+<div class="paragraph">
+<p>Choosing the correct Atlas cluster tier and configuration is an important step in setting up a successful production MongoDB deployment. You can always modify a cluster at a later time, but getting started with the right configuration is possible with a few calculations based on your data set size and network requirements. For more information, see <a href="https://docs.atlas.mongodb.com/production-considerations/" target="_blank" rel="noopener">MongoDB Atlas Production Considerations</a>.</p>
 </div>
 </div>
 </div>
@@ -1283,15 +1305,57 @@ If you’re deploying Example Product Name into an existing VPC, make sure that 
 <h2 id="_security">Security</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>Add any security-related information.</em></p>
+<p>This Quick Start provisions a cluster with security and TLS enabled by default. Optionally, network peering can be enabled on a new or existing AWS VPC. For more information, see <a href="https://docs.atlas.mongodb.com/setup-cluster-security/" target="_blank" rel="noopener">MongoDB Security Features and Setup</a>.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_other_useful_information">Other useful information</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p><em>Add any other details that will help the customer use the software on AWS.</em></p>
+<p>If you plan to use AWS Lambda, ensure that you follow the recommendations from <a href="https://docs.atlas.mongodb.com/best-practices-connecting-to-aws-lambda/" target="_blank" rel="noopener">Best Practices Connecting from AWS Lambda</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_mongodb_atlas_cloudformation_resource_reference">MongoDB Atlas CloudFormation resource reference</h3>
+<div class="ulist">
+<div class="title">MongoDB::Atlas::Project</div>
+<ul>
+<li>
+<p>A logical grouping of clusters. You can have multiple clusters within a single project and multiple projects within a single organization.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">MongoDB::Atlas::Cluster</div>
+<ul>
+<li>
+<p>A set of nodes comprising a MongoDB deployment and database. In Atlas, clusters can be replica sets or sharded deployments.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">MongoDB::Atlas::DatabaseUser</div>
+<ul>
+<li>
+<p>Credentials used to authenticate a client to access a MongoDB database deployment. You can assign privileges to a database user to determine a user&#8217;s access level to a cluster. Database users are different from Atlas users. Database users have access to MongoDB deployments but not the Atlas application.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">MongoDB::Atlas::ProjectIPAccessList</div>
+<ul>
+<li>
+<p>Atlas allows only client connections to the cluster from entries in the project&#8217;s IP
+access list. Each entry is either a single IP address or CIDR.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">MongoDB::Atlas::NetworkPeering</div>
+<ul>
+<li>
+<p>Process by which two internet networks connect and exchange traffic. You can directly peer your VPC with the Atlas VPC created for your MongoDB clusters. Using network peering, your application servers can connect directly to Atlas while remaining isolated from public networks.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For more information, see <a href="https://github.com/aws-quickstart/quickstart-mongodb-atlas-resources/tree/main/cfn-resources/project/docs" target="_blank" rel="noopener">MongoDB::Atlas::Project</a>, <a href="https://docs.atlas.mongodb.com/reference/api/projects/" target="_blank" rel="noopener">MongoDB Projects</a>, and <a href="https://docs.atlas.mongodb.com/mongodb-reference/" target="_blank" rel="noopener">MongoDB Reference</a>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1302,7 +1366,7 @@ If you’re deploying Example Product Name into an existing VPC, make sure that 
 <p><strong>Q.</strong> I encountered a <strong>CREATE_FAILED</strong> error when I launched the Quick Start.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. This setting is under <strong>Advanced</strong> in the AWS CloudFormation console on the <strong>Configure stack options</strong> page. With this setting, the stack’s state is retained, and the instance keeps running so that you can troubleshoot the issue. (For Windows, look at the log files in <code>%ProgramFiles%\Amazon\EC2ConfigService</code> and <code>C:\cfn\log</code>.)</p>
+<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, we recommend that you relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. (This setting is under <strong>Advanced</strong> in the AWS CloudFormation console, <strong>Options</strong> page.) With this setting, the stack’s state is retained, and the instance remains running so you can troubleshoot the issue. (For Windows, look at the log files in <code>%ProgramFiles%\Amazon\EC2ConfigService</code> and <code>C:\cfn\log</code>.)</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1311,19 +1375,28 @@ If you’re deploying Example Product Name into an existing VPC, make sure that 
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, you continue to incur AWS charges for this stack. Delete the stack when you finish troubleshooting.
+When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, you continue to incur AWS charges for the stack. Ensure that you delete the stack when you finish troubleshooting. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html" target="_blank" rel="noopener">Troubleshooting AWS CloudFormation</a>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html" target="_blank" rel="noopener">Troubleshooting AWS CloudFormation</a>.</p>
+<p><strong>Q.</strong> I encountered a size limitation error when I deployed the AWS CloudFormation templates.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> I encountered a size-limitation error when I deployed the AWS CloudFormation templates.</p>
+<p><strong>A.</strong> We recommend that you launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template size limitations. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html" target="_blank" rel="noopener">AWS CloudFormation quotas</a>.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html" target="_blank" rel="noopener">AWS CloudFormation quotas</a>.</p>
+<p><strong>Q.</strong> Do I need to run the <strong>RegisterMongoDBResource</strong> step each time?</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> No. You must run this step only once per Region.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q.</strong> What does the <strong>RegisterMongoDBResource</strong> step do?</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> It registers each of the MongoDB Atlas CloudFormation resource types. This is a standard requirement for CloudFormation. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html" target="_blank" rel="noopener">Custom resource</a>.</p>
 </div>
 </div>
 </div>
@@ -1331,7 +1404,10 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 <h2 id="_troubleshooting">Troubleshooting</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>&lt;Steps for troubleshooting the deployment.&gt;</p>
+<p>Errors can typlically be resolved by inspecting the CloudFormation event logs or CloudWatch logs created by the MongoDB Atlas CloudFormation resources.</p>
+</div>
+<div class="paragraph">
+<p>If a stack fails to deploy, check the <strong>Events</strong> tab. If the error occurs for one of the MongoDB Atlas resources (for example, MongoDB::Atlas::Cluster), you will find a corresponding Amazon CloudWatch Logs group called <strong>mongodb-atlas-cluster-logs</strong>. Locate this group, and check the latest log entry to identify the issue.</p>
 </div>
 </div>
 </div>
@@ -1352,9 +1428,9 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </table>
 </div>
 <div class="sect2">
-<h3 id="_parameters_for_deploying_mongodb_atlas_without_vpc_peering">Parameters for deploying MongoDB Atlas without VPC peering</h3>
+<h3 id="_parameters_for_deploying_mongodb_atlas_without_vpc_peering">Parameters for deploying MongoDB Atlas without VPC peering.</h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. MongoDB Atlas ApiKey Configuration</caption>
+<caption class="title">Table 1. MongoDB Atlas API key configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1369,27 +1445,27 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API PublicKey
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API public key.
 (<code>PublicKey</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PublicKey</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Public API Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB cloud public API key.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API PrivateKey
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API private key.
 (<code>PrivateKey</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PrivateKey</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Private API Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB cloud private API key.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API OrgId
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API organization ID.
 (<code>OrgId</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>OrgId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Organization Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB cloud organization ID.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. MongoDB Atlas Configuration</caption>
+<caption class="title">Table 2. MongoDB Atlas configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1404,39 +1480,39 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Register MongoDB Atlas CloudFormation resources
+<td class="tableblock halign-left valign-top"><p class="tableblock">Register MongoDB Atlas CloudFormation resources.
 (<code>RegisterMongoDBResources</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Yes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Chose Yes to register MongoDB Atlas CloudFormation resource types. If you have already registered the resources in this AWS Region, you may choose No.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Choose "Yes" to register MongoDB Atlas CloudFormation resource types. If you already registered resources in your AWS Region, enter "No."</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new Atlas Project
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new Atlas project.
 (<code>ProjectName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>aws-quickstart</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the project.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the project.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new cluster
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new cluster.
 (<code>ClusterName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Cluster-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cluster as it appears in Atlas. Once the cluster is created, its name cannot be changed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cluster as it appears in Atlas. This name cannot be changed after the cluster is created.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region for Atlas Cluster
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region for Atlas cluster.
 (<code>ClusterRegion</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-east-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region where the Atlas DB Cluster will run.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region where the Atlas database cluster runs.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas Instance Size
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas instance size.
 (<code>ClusterInstanceSize</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>M10</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Atlas provides different cluster tiers, each with a default storage capacity and RAM size. The cluster you select is used for all the data-bearing hosts in your cluster tier. See <a href="https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws" class="bare">https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Atlas provides different cluster tiers, each with a default storage capacity and RAM size. The cluster you choose is used for all data-bearing hosts in your cluster tier (see <a href="https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws" class="bare">https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws</a>).</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. AWS Quick Start Configuration</caption>
+<caption class="title">Table 3. AWS Quick Start configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1451,30 +1527,30 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Bucket Name
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 bucket name.
 (<code>QSS3BucketName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>aws-quickstart</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Key Prefix
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 key prefix.
 (<code>QSS3KeyPrefix</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>quickstart-mongodb-atlas/</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Bucket Region
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 bucket Region.
 (<code>QSS3BucketRegion</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-east-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. If you use your own bucket, you must specify this value.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_parameters_for_deploying_mongodb_atlas_with_vpc_peering_to_a_new_vpc">Parameters for deploying MongoDB Atlas with VPC peering to a new VPC</h3>
+<h3 id="_parameters_for_deploying_mongodb_atlas_with_vpc_peering_into_a_new_vpc">Parameters for deploying MongoDB Atlas with VPC peering into a new VPC.</h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Network Configuration</caption>
+<caption class="title">Table 4. Network configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1489,51 +1565,51 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Availability Zones
+<td class="tableblock halign-left valign-top"><p class="tableblock">Availability Zones.
 (<code>AvailabilityZones</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The list of Availability Zones to use for the subnets in the VPC. The Quick Start uses two Availability Zones from your list and preserves the logical order you specify.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of Availability Zones to use for the VPC subnets. You can specify two Availability Zones.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">VPC CIDR
+<td class="tableblock halign-left valign-top"><p class="tableblock">VPC CIDR.
 (<code>VPCCIDR</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>10.0.0.0/16</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The CIDR block for the VPC.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block for the VPC.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Private Subnet 1 CIDR
+<td class="tableblock halign-left valign-top"><p class="tableblock">Private subnet 1 CIDR.
 (<code>PrivateSubnet1CIDR</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>10.0.0.0/19</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The CIDR block for the private subnet located in Availability Zone 1.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block for the private subnet, located in Availability Zone 1.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Private Subnet 2 CIDR
+<td class="tableblock halign-left valign-top"><p class="tableblock">Private subnet 2 CIDR.
 (<code>PrivateSubnet2CIDR</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>10.0.32.0/19</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The CIDR block for the private subnet located in Availability Zone 2.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block for the private subnet, located in Availability Zone 2.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Public Subnet 1 CIDR
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public subnet 1 CIDR.
 (<code>PublicSubnet1CIDR</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>10.0.128.0/20</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The CIDR block for the public (DMZ) subnet 1 located in Availability Zone 1.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block for public (DMZ) subnet 1, located in Availability Zone 1.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Public Subnet 2 CIDR
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public subnet 2 CIDR.
 (<code>PublicSubnet2CIDR</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>10.0.144.0/20</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The CIDR block for the public (DMZ) subnet 2 located in Availability Zone 2.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block for public (DMZ) subnet 2, located in Availability Zone 2.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">VPC peering CIDR block
+<td class="tableblock halign-left valign-top"><p class="tableblock">VPC peering CIDR block.
 (<code>RouteTableCIDRBlock</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block to use for your VPC Peering.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block for VPC peering.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. MongoDB Atlas ApiKey Configuration</caption>
+<caption class="title">Table 5. MongoDB Atlas API key configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1548,27 +1624,27 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API PublicKey
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API public key.
 (<code>PublicKey</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PublicKey</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Public API Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB cloud public API key.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API PrivateKey
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API private key.
 (<code>PrivateKey</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PrivateKey</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Private API Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB cloud private API key.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API OrgId
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API organization ID
 (<code>OrgId</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>OrgId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Organization Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB cloud organization ID.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. MongoDB Atlas Configuration</caption>
+<caption class="title">Table 6. MongoDB Atlas configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1583,39 +1659,39 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Register MongoDB Atlas CloudFormation resources
+<td class="tableblock halign-left valign-top"><p class="tableblock">Register MongoDB Atlas CloudFormation resources.
 (<code>RegisterMongoDBResources</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Yes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Chose Yes to register MongoDB Atlas CloudFormation resource types. If you have already registered the resources in this AWS Region, you may choose No.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enter "Yes" to register MongoDB Atlas CloudFormation resource types. If you already registered resources in your AWS Region, enter "No."</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new Atlas Project
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new Atlas project.
 (<code>ProjectName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>aws-quickstart-newvpc</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the project.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the project.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new cluster
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new cluster.
 (<code>ClusterName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Cluster-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cluster as it appears in Atlas. Once the cluster is created, its name cannot be changed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cluster as it appears in Atlas. This name cannot be changed after the cluster is created.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region for Atlas Cluster
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region for Atlas cluster.
 (<code>ClusterRegion</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-east-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region where the Atlas DB Cluster will run.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region where the Atlas database runs.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas Instance Size
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas instance size.
 (<code>ClusterInstanceSize</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>M10</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Atlas provides different cluster tiers, each with a default storage capacity and RAM size. The cluster you select is used for all the data-bearing hosts in your cluster tier. See <a href="https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws" class="bare">https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Atlas provides different cluster tiers, each with a default storage capacity and RAM size. The cluster you choose is used for all data-bearing hosts in your cluster tier (see <a href="https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws" class="bare">https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws</a>).</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. AWS Quick Start Configuration</caption>
+<caption class="title">Table 7. AWS Quick Start configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1630,30 +1706,30 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Bucket Name
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 bucket name.
 (<code>QSS3BucketName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>aws-quickstart</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Key Prefix
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 key prefix.
 (<code>QSS3KeyPrefix</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>quickstart-mongodb-atlas/</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Bucket Region
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 bucket Region.
 (<code>QSS3BucketRegion</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-east-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. If you use your own bucket, you must specify this value.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_parameters_for_deploying_mongodb_atlas_with_vpc_peering_to_an_existing_vpc">Parameters for deploying MongoDB Atlas with VPC peering to an existing VPC</h3>
+<h3 id="_parameters_for_deploying_mongodb_atlas_with_vpc_peering_into_an_existing_vpc">Parameters for deploying MongoDB Atlas with VPC peering into an existing VPC.</h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. Network Configuration</caption>
+<caption class="title">Table 8. Network configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1668,21 +1744,21 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AWS VPC to peer with
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS VPC to peer with.
 (<code>VPC</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">VPC-ID of your existing Virtual Private Cloud (VPC) which you wish to peer to your new MongoDB Atlas cluster. This is the VPC that your application uses usually.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VPC ID of your existing VPC that you want to peer to. This is typically the VPC that your application uses.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">VPC peering CIDR block
+<td class="tableblock halign-left valign-top"><p class="tableblock">VPC peering CIDR block.
 (<code>RouteTableCIDRBlock</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block to use for your VPC Peering.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR block to use for VPC peering.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. MongoDB Atlas ApiKey Configuration</caption>
+<caption class="title">Table 9. MongoDB Atlas API key configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1697,27 +1773,27 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API PublicKey
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API public key.
 (<code>PublicKey</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PublicKey</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Public API Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB cloud public API key.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API PrivateKey
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API private key.
 (<code>PrivateKey</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PrivateKey</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Private API Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB cloud private API key.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API OrgId
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas API organization ID.
 (<code>OrgId</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>OrgId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your MongoDB Cloud Organization Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB cloud organization ID.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. MongoDB Atlas Configuration</caption>
+<caption class="title">Table 10. MongoDB Atlas configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1732,39 +1808,39 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Register MongoDB Atlas CloudFormation resources
+<td class="tableblock halign-left valign-top"><p class="tableblock">Register MongoDB Atlas CloudFormation resources.
 (<code>RegisterMongoDBResources</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Yes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Chose Yes to register MongoDB Atlas CloudFormation resource types. If you have already registered the resources in this AWS Region, you may choose No.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Choose "Yes" to register MongoDB Atlas CloudFormation resource types. If you already registered resources in your AWS Region, enter "No."</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new Atlas Project
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new Atlas project.
 (<code>ProjectName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>aws-quickstart-vpc</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the project.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the project.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new cluster
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of new cluster.
 (<code>ClusterName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Cluster-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cluster as it appears in Atlas. Once the cluster is created, its name cannot be changed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cluster as it appears in Atlas. This name cannot be changed after the cluster is created.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region for Atlas Cluster
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region for Atlas cluster.
 (<code>ClusterRegion</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-east-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region where the Atlas DB Cluster will run.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region where the Atlas database cluster runs.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas Instance Size
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Atlas instance size.
 (<code>ClusterInstanceSize</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>M10</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Atlas provides different cluster tiers, each with a default storage capacity and RAM size. The cluster you select is used for all the data-bearing hosts in your cluster tier. See <a href="https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws" class="bare">https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Atlas provides different cluster tiers, each with a default storage capacity and RAM size. The cluster you choose is used for all data-bearing hosts in your cluster tier (see <a href="https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws" class="bare">https://docs.atlas.mongodb.com/reference/amazon-aws/#amazon-aws</a>).</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. AWS Quick Start Configuration</caption>
+<caption class="title">Table 11. AWS Quick Start configuration.</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1779,22 +1855,22 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Bucket Name
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 bucket name.
 (<code>QSS3BucketName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>aws-quickstart</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Key Prefix
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 key prefix.
 (<code>QSS3KeyPrefix</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>quickstart-mongodb-atlas/</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 Bucket Region
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 bucket Region.
 (<code>QSS3BucketRegion</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-east-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. If you use your own bucket, you must specify this value.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1805,7 +1881,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <h2 id="_send_us_feedback">Send us feedback</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To post feedback, submit feature ideas, or report bugs, use the <strong>Issues</strong> section of the <a href="https://github.com/aws-quickstart/quickstart-documentation-base" target="_blank" rel="noopener">GitHub repository</a> for this Quick Start. To submit code, see the <a href="https://aws-quickstart.github.io/" target="_blank" rel="noopener">Quick Start Contributor’s Guide</a>.</p>
+<p>To post feedback, submit feature ideas, or report bugs, use the <strong>Issues</strong> section of the <a href="https://github.com/aws-quickstart/quickstart-mongodb-atlas" target="_blank" rel="noopener">GitHub repository</a> for this Quick Start. To submit code, see the <a href="https://aws-quickstart.github.io/" target="_blank" rel="noopener">Quick Start Contributor’s Guide</a>.</p>
 </div>
 </div>
 </div>
@@ -1821,7 +1897,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <h2 id="_github_repository">GitHub repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Visit our <a href="https://github.com/aws-quickstart/quickstart-documentation-base" target="_blank" rel="noopener">GitHub repository</a> to download
+<p>Visit our <a href="https://github.com/aws-quickstart/quickstart-mongodb-atlas" target="_blank" rel="noopener">GitHub repository</a> to download
 the templates and scripts for this Quick Start, to post your comments,
 and to share your customizations with others.</p>
 </div>
@@ -1843,7 +1919,7 @@ and to share your customizations with others.</p>
 <p class="footer-text">
 <!-- We can use document attributes: -->
 <!-- Generated with Asciidoctor v2.0.12. -->
-<a href="https://aws.amazon.com/privacy/">Privacy</a> | <a href="https://aws.amazon.com/terms/">Site terms</a> | &copy; 2021, Amazon Web Services, Inc. or its affiliates and Example Company Name, Ltd.. All rights reserved.
+<a href="https://aws.amazon.com/privacy/">Privacy</a> | <a href="https://aws.amazon.com/terms/">Site terms</a> | &copy; 2021, Amazon Web Services, Inc. or its affiliates and MongoDB Inc.. All rights reserved.
 </p>
 </body>
 </html>
